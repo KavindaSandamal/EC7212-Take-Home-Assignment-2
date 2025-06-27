@@ -1,6 +1,5 @@
 # Sandamal IMK - EG/2020/4190
 # --  Otsu's Thresholding on a Synthetic Image with Gaussian Noise --
-
 import cv2
 import numpy as np
 import matplotlib.pyplot as plt
@@ -16,12 +15,8 @@ def add_gaussian_noise(image, mean=0, sigma=20):
 # Create blank image
 height, width = 200, 200
 image = np.zeros((height, width), dtype=np.uint8)  # Background = 0
-
-# Fixed intensities
 obj1_val = 90    # Rectangle 1
 obj2_val = 160   # Rectangle 2
-
-# Draw two non-overlapping rectangles
 cv2.rectangle(image, (40, 50), (100, 110), obj1_val, -1)    # Object 1
 cv2.rectangle(image, (120, 130), (180, 180), obj2_val, -1)  # Object 2
 
@@ -33,8 +28,8 @@ _, otsu_thresh = cv2.threshold(noisy_image, 0, 255, cv2.THRESH_BINARY + cv2.THRE
 
 # Save images
 output_dir = 'Outputs'
-os.makedirs(output_dir, exist_ok=True)
 
+os.makedirs(output_dir, exist_ok=True)
 cv2.imwrite(os.path.join(output_dir, 'image_original.png'), image)
 cv2.imwrite(os.path.join(output_dir, 'image_noisy.png'), noisy_image)
 cv2.imwrite(os.path.join(output_dir, 'image_otsu.png'), otsu_thresh)

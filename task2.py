@@ -1,6 +1,5 @@
 # Sandamal IMK - EG/2020/4190
 # -- Region Growing-Based Image Segmentation --
-
 import cv2
 import numpy as np
 import matplotlib.pyplot as plt
@@ -27,13 +26,12 @@ def region_growing(image, seeds, threshold=20):
             if 0 <= ny < h and 0 <= nx < w and not visited[ny, nx]:
                 if abs(int(image[ny, nx]) - int(image[y, x])) <= threshold:
                     queue.append((ny, nx))
-
+                    
     return segmented
 
 # Load a real grayscale image
 image_path = 'D:\EC7212_Assignment_2_4190\Image\original_image.jpg'  
 image = cv2.imread(image_path, cv2.IMREAD_GRAYSCALE)
-
 if image is None:
     raise FileNotFoundError(f"Image not found at path: {image_path}")
 
@@ -51,7 +49,6 @@ os.makedirs(output_dir, exist_ok=True)
 
 cv2.imwrite(os.path.join(output_dir, 'real_image_grayscale.png'), image)
 cv2.imwrite(os.path.join(output_dir, 'region_growing_result.png'), segmented_image)
-
 plt.figure(figsize=(10, 5))
 
 plt.subplot(1, 2, 1)
